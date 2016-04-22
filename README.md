@@ -27,3 +27,9 @@ Positionner votre produit par rapport à un outil existant sur le marché
 Modèle économique de votre produit
 Comment évoluer votre produit ou l'application
 Démo
+
+Le 24/06 une semaine avant la soutenance :
+Déposer sur moodle en pdf le Poster.
+Déposer le résumé AN et FR
+
+Le 30/06 : Déposer un ou deux Slide pour le speech de 2 minutes.
