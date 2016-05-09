@@ -16,17 +16,25 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:height="50dp"
-        android:textSize="40dp"/>
+        android:textSize="40dp"
+        android:id="@+id/textView" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
         android:src="@mipmap/deck"
         android:minWidth="700dp"
         android:minHeight="900dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:layout_below="@+id/textView" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tester Bluetooth"
+        android:id="@+id/button2"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
