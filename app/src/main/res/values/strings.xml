@@ -1,4 +1,3 @@
 <resources>
     <string name="app_name">ShareDeck</string>
-    <string name="permission_bluetooth">permission_bluetooth</string>
 </resources>
