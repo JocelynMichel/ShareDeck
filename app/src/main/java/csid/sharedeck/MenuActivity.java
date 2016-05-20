@@ -24,5 +24,15 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        final Button TestDeckButton = (Button) findViewById(R.id.button3);
+        TestDeckButton.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, InteractiveDeckActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

@@ -13,7 +13,7 @@ import java.util.*;
 public class ConnectThread extends Thread {
     private final BluetoothSocket mmSocket;
     private final BluetoothDevice mmDevice;
-    private final BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    private BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
     public ConnectThread(BluetoothDevice device) {
         BluetoothSocket tmp = null;
