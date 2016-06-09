@@ -10,7 +10,7 @@ import java.util.*;
 
 public class AcceptThread extends Thread {
     private final BluetoothServerSocket mmServerSocket;
-    private final BluetoothAdapter mbluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    private BluetoothAdapter mbluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
     public AcceptThread() {
         BluetoothServerSocket tmp = null;
