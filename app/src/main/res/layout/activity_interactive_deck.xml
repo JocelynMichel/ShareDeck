@@ -3,22 +3,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/layout_parent"
     tools:context="csid.sharedeck.InteractiveDeckActivity">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Joueur"
-        android:id="@+id/joueur"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_alignRight="@+id/imageDeck2"
-        android:layout_alignEnd="@+id/imageDeck2" />
+        android:background="@drawable/red_button"
+        android:text="Joueur 1"
+        android:id="@+id/joueur1"
+        style="@style/button_text"
+        android:layout_above="@+id/imageDeck1"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_button"
+        android:text="Joueur 2"
+        android:id="@+id/joueur2"
+        android:layout_marginTop="21dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/joueur1"
+        android:layout_toStartOf="@+id/joueur1" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/green_button"
+        android:text="Joueur 3"
+        android:id="@+id/joueur3"
+        android:layout_alignTop="@+id/joueur2"
+        android:layout_toRightOf="@+id/joueur1"
+        android:layout_toEndOf="@+id/joueur1" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/deck"
-        android:id="@+id/imageDeck2"
+        android:id="@+id/imageDeck1"
         android:minHeight="300dp"
         android:minWidth="300dp"
         android:layout_alignParentBottom="true"
@@ -34,19 +57,38 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Distribuez !"
+        android:id="@+id/textView2"
 
-
+        android:layout_above="@+id/joueur1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="43dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Main du joueur"
-        android:id="@+id/textView2"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_alignParentTop="true"
-         />
+        android:text=""
+        android:id="@+id/displayNbCardInDeck"
+        android:layout_alignBottom="@+id/imageDeck1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R"
+        android:id="@+id/resetButton"
+        android:layout_above="@+id/displayNbCardInDeck"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/imageDeck1"
+        android:layout_toStartOf="@+id/imageDeck1"/>
+
 
 </RelativeLayout>

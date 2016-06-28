@@ -22,7 +22,15 @@ public class Hand {
         return cards;
     }
 
+    public ArrayList<Card> getAllCards(){
+        return cards;
+    }
+
     public Card getLastCard(){
         return cards.get(cards.size()-1);
+    }
+
+    public int getNbCard(){
+        return cards.size();
     }
 }

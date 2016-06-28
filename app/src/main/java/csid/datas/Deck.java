@@ -50,6 +50,10 @@ public class Deck {
         return oneCard;
     }
 
+    public int getNbCard(){
+        return cards.size();
+    }
+
     public void displayDeck(){
         for(Card oneCard : cards){
             Log.i("Couleur", oneCard.getSymbol());
