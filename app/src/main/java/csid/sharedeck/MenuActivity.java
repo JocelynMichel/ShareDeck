@@ -36,7 +36,7 @@ public class MenuActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, InteractiveDeckActivity.class);
+                Intent intent = new Intent(MenuActivity.this, ChooseNbCardActivity.class);
                 startActivity(intent);
             }
         });

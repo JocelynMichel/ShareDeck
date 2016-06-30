@@ -1,10 +1,13 @@
 package csid.datas;
 
 import android.graphics.drawable.*;
+import android.renderscript.Allocation;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import csid.sharedeck.R;
 
 /**
  * Created by cecca on 10/06/2016.
@@ -12,27 +15,52 @@ import java.util.Random;
 public class Deck {
     private ArrayList<Card> cards;
     private int maxCard = 52 ;
-    public String[] couleurs = new String[]{"trèfle","coeur","carreau","pique"};
+    public String[] couleurs = new String[]{"trefle","coeur","carreau","pique"};
     private BitmapDrawable img=null; // image du deck
     private int x,y;
     Random random = new Random();
 
-    public Deck() {
+    public Deck(String nbCards) {
         this.cards=new ArrayList<>();
-        this.buildDeck();
+        if(nbCards.equals("32")){
+            this.buildDeck32();
+        }
+        else{
+            this.buildDeck52();
+        }
+
     }
 
-    public void buildDeck(){
+    public void buildDeck32(){
+        for(int iCouleur = 0; iCouleur < couleurs.length;iCouleur++) {
+            for (int i = 6; i < 14; i++) {
+                if(i == 6){
+                    cards.add(new Card("1", couleurs[iCouleur]));
+                }
+                else if (i < 11) {
+                    cards.add(new Card("" + i, couleurs[iCouleur]));
+                } else if (i == 11) {
+                    cards.add(new Card("J", couleurs[iCouleur]));
+                } else if (i == 12) {
+                    cards.add(new Card("D", couleurs[iCouleur]));
+                } else if (i == 13) {
+                    cards.add(new Card("K", couleurs[iCouleur]));
+                }
+            }
+        }
+    }
+
+    public void buildDeck52(){
         for(int iCouleur = 0; iCouleur < couleurs.length;iCouleur++) {
             for (int i = 1; i < 14; i++) {
                 if (i < 11) {
                     cards.add(new Card("" + i, couleurs[iCouleur]));
                 } else if (i == 11) {
-                    cards.add(new Card("V", couleurs[iCouleur]));
+                    cards.add(new Card("J", couleurs[iCouleur]));
                 } else if (i == 12) {
                     cards.add(new Card("D", couleurs[iCouleur]));
                 } else if (i == 13) {
-                    cards.add(new Card("R", couleurs[iCouleur]));
+                    cards.add(new Card("K", couleurs[iCouleur]));
                 }
             }
         }

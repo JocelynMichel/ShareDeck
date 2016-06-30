@@ -37,33 +37,12 @@
         android:layout_toRightOf="@+id/joueur1"
         android:layout_toEndOf="@+id/joueur1" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/deck"
-        android:id="@+id/imageDeck1"
-        android:minHeight="300dp"
-        android:minWidth="300dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/deck"
-        android:id="@+id/imageDeck"
-        android:minHeight="300dp"
-        android:minWidth="300dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Distribuez !"
         android:id="@+id/textView2"
-
         android:layout_above="@+id/joueur1"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="43dp" />
@@ -89,6 +68,51 @@
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/imageDeck1"
         android:layout_toStartOf="@+id/imageDeck1"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/deck"
+        android:id="@+id/imageDeck1"
+        android:minHeight="300dp"
+        android:minWidth="300dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/deck"
+        android:id="@+id/imageDeck"
+        android:minHeight="300dp"
+        android:minWidth="300dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/imageDeck1"
+        android:layout_alignLeft="@+id/imageDeck1"
+        android:layout_alignStart="@+id/imageDeck1"
+        android:layout_alignBottom="@+id/displayNbCardInDeck"
+        android:layout_alignRight="@+id/joueur3"
+        android:layout_alignEnd="@+id/joueur3"
+        android:id="@+id/layout_hand"></LinearLayout>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Auto"
+        android:id="@+id/btnAuto"
+        android:layout_above="@+id/resetButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/imageDeck1"
+        android:layout_toStartOf="@+id/imageDeck1"
+        android:textSize="8dp"/>
 
 
 </RelativeLayout>

@@ -13,14 +13,27 @@ public class Game {
 
     }
 
-    public void run(){
-        this.deck = new Deck();
+    public void run(String nbCards){
+        this.deck = new Deck(nbCards);
         this.players = new ArrayList<Player>();
     }
 
     public boolean GiveOneCardToPlayer(Player player){
         if(deck.getNbCard() > 0) {
             player.addCardToHand(deck.giveOneCard());
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public boolean GiveCardsToPlayerAuto(int nbCards){
+        if(deck.getNbCard() > 0 && nbCards*players.size()<=deck.getNbCard()) {
+            for (Player onePlayer:players) {
+                for (int i = 0; i < nbCards ; i++){
+                    onePlayer.addCardToHand(deck.giveOneCard());
+                }
+            }
             return true;
         }
         else{
@@ -55,5 +68,9 @@ public class Game {
         else{
             return null;
         }
+    }
+
+    public int getNbPlayers(){
+        return players.size();
     }
 }

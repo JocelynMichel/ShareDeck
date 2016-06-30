@@ -1,9 +1,12 @@
 package csid.sharedeck;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.DragEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.*;
@@ -13,11 +16,15 @@ import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
 import android.widget.AbsoluteLayout;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.util.*;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -39,8 +46,12 @@ public class InteractiveDeckActivity extends AppCompatActivity {
     Player player1 = new Player("Bboy");
     Player player2 = new Player("Joyceline");
     Player player3 = new Player("Gaêt");
+    LinearLayout layoutHand;
     TextView nbCardOfDeck;
     Button resetButton;
+    Button autoBouton;
+    AlertDialog dialogDistribCardAuto;
+    NumberPicker nbPicker;
     boolean isSelect = false;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -54,11 +65,17 @@ public class InteractiveDeckActivity extends AppCompatActivity {
         setContentView(R.layout.activity_interactive_deck);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        currentGame.run();
+        final String nbCards = (String) getIntent().getSerializableExtra("NbCards") ;
+
+        Log.i("NbcardJeu", nbCards);
+
+        currentGame.run(nbCards);
 
         nbCardOfDeck = (TextView) findViewById(R.id.displayNbCardInDeck);
 
-        nbCardOfDeck.setText("" + currentGame.getDeck().getNbCard());
+        Log.i("nbcalculer", ""+currentGame.getDeck().getNbCard());
+
+        nbCardOfDeck.setText(""+currentGame.getDeck().getNbCard());
 
         currentGame.addPlayer(player1);
         currentGame.addPlayer(player2);
@@ -70,6 +87,12 @@ public class InteractiveDeckActivity extends AppCompatActivity {
         resetButton = (Button) findViewById(R.id.resetButton);
         resetButton.setVisibility(View.INVISIBLE);
         resetButton.setOnClickListener(clickListener);
+
+        autoBouton = (Button) findViewById(R.id.btnAuto);
+        //autoBouton.setVisibility(View.INVISIBLE);
+        autoBouton.setOnClickListener(clickListener);
+
+
 
         Button buttonJoueur1 = (Button) findViewById(R.id.joueur1);
         buttonJoueur1.setOnHoverListener(hoverListenerDrop);
@@ -86,22 +109,87 @@ public class InteractiveDeckActivity extends AppCompatActivity {
         buttonJoueur3.setOnClickListener(clickListener);
         buttonJoueur3.setText(player3.getNamePlayer());
 
+        Toast.makeText(InteractiveDeckActivity.this, "Début du jeu libre",Toast.LENGTH_SHORT).show();
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     public void createTextView(String value, String signe) {
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.layout_parent);
+        layoutHand = (LinearLayout) findViewById(R.id.layout_hand);
         Button buttonHandCards = new Button(this);
 
-        buttonHandCards.setText("Je test");
-        //buttonHandCards.setBackgroundColor(Red);
-        buttonHandCards.setX(initX);
-        buttonHandCards.setY(initY);
+        Log.i("Valeur", value);
+        Log.i("Signe", signe);
 
-        layout.addView(buttonHandCards);
+        buttonHandCards.setText(value+" / "+signe);
+        buttonHandCards.setWidth(20);
+
+        //buttonHandCards.setBackgroundColor(Red);
+        //buttonHandCards.setX(initX);
+        //buttonHandCards.setY(initY);
+
+        layoutHand.addView(buttonHandCards);
         //testValue.setVisibility(View.VISIBLE);
+    }
+
+    public void displayHand(View v){
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.activity_show_hand, null);
+        final GridView handGrid = (GridView) alertLayout.findViewById(R.id.hand_grid);
+
+        HandAdapter handAdapter = new HandAdapter(this);
+        Button playerButton = (Button) findViewById(v.getId());
+        Player player = currentGame.getPlayerByName((String) playerButton.getText());
+
+        ArrayList<Card> cardsHand = player.getHand().getAllCards();
+        for (Card oneCard : cardsHand) {
+            handAdapter.addElement(oneCard);
+        }
+
+        handGrid.setAdapter(handAdapter);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Ma main");
+
+        // this is set the view from XML inside AlertDialog
+        alert.setView(alertLayout);
+        // disallow cancel of AlertDialog on click of back button and outside touch
+        alert.setCancelable(true);
+
+        AlertDialog dialog = alert.create();
+        dialog.show();
+    }
+
+    public void distribCardAuto(){
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.activity_distrib_auto, null);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        //alert.setTitle("Ma main");
+
+        nbPicker = (NumberPicker)alertLayout.findViewById(R.id.nbPick);
+        nbPicker.setMinValue(1);
+
+        nbPicker.setMaxValue((int)Math.floor(currentGame.getDeck().getNbCard()/currentGame.getNbPlayers()));
+        nbPicker.setWrapSelectorWheel(false);
+        nbPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS); // Désactive clavier numérique
+
+
+        final Button validBtn = (Button)alertLayout.findViewById(R.id.validNbCard);
+        validBtn.setOnClickListener(clickListener);
+
+
+        // this is set the view from XML inside AlertDialog
+        alert.setView(alertLayout);
+        // disallow cancel of AlertDialog on click of back button and outside touch
+        alert.setCancelable(true);
+
+        dialogDistribCardAuto = alert.create();
+        dialogDistribCardAuto.show();
+
+
     }
 
     private OnTouchListener touchListenerImage = new OnTouchListener() {
@@ -176,23 +264,30 @@ public class InteractiveDeckActivity extends AppCompatActivity {
                 TextView text = (TextView) findViewById(R.id.textView2);
                 text.setText("Distribuez !"); //Réinitialise le champs
                 v.setVisibility(View.INVISIBLE);
+                imageCard.setVisibility(View.VISIBLE);
+                imageCardBis.setVisibility(View.VISIBLE);
             }
-            /*else if (v.getId() == R.id.joueur1) {
-                imageCard.setVisibility(View.INVISIBLE);
-                imageCardBis.setVisibility(View.INVISIBLE);
-                Button playerButton = (Button) findViewById(R.id.joueur1);
-                Player player = currentGame.getPlayerByName((String) playerButton.getText());
+            else if(v.getId() == R.id.btnAuto){
+                distribCardAuto();
+            }
+            else if(v.getId() == R.id.validNbCard){
+                currentGame.GiveCardsToPlayerAuto(nbPicker.getValue());
+                nbCardOfDeck.setText("" + currentGame.getDeck().getNbCard());
+                dialogDistribCardAuto.cancel();
 
-                ArrayList<Card> cardsHand = player.getHand().getAllCards();
-                for (Card oneCard : cardsHand) {
-                    createTextView(oneCard.getSymbol(), oneCard.getValue());
+                if(currentGame.getDeck().getNbCard()==0){
+                    imageCard.setVisibility(View.INVISIBLE);
+                    imageCardBis.setVisibility(View.INVISIBLE);
                 }
+            }
+            else if (v.getId() == R.id.joueur1) {
+                displayHand(v);
 
-            }*/ else {
+            } else {
                 Button boutonPlayer = (Button) findViewById(v.getId());
                 TextView text = (TextView) findViewById(R.id.textView2);
                 Player player = currentGame.getPlayerByName((String) boutonPlayer.getText());
-                text.setText("Main de :" + player.getNamePlayer()); //Réinitialise le champs
+                text.setText("Main de : " + player.getNamePlayer()); //Réinitialise le champs
                 resetButton.setVisibility(View.VISIBLE);
 
                 ArrayList<Card> playerHand = player.getHand().getAllCards();
