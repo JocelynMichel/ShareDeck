@@ -9,7 +9,7 @@
         <item name="android:colorBackground">@color/colorApp</item>
 
     </style>
-<<<<<<< HEAD
+
     <style name="request_text" >
         <item name="android:layout_width" >fill_parent</item>
         <item name="android:layout_height" >wrap_content</item>
@@ -48,22 +48,8 @@
         <item name="android:shadowDx" >1</item>
         <item name="android:shadowDy" >1</item>
         <item name="android:shadowRadius" >2</item>
-=======
-
-    <style name="button_text">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_margin">3dp</item>
-        <item name="android:textSize">30dp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:shadowColor">#000000</item>
-        <item name="android:shadowDx">1</item>
-        <item name="android:shadowDy">1</item>
-        <item name="android:shadowRadius">2</item>
->>>>>>> fd0d1c8023b19ce729a35b34ecc437eb07ebe54c
     </style>
+
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

@@ -34,7 +34,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-import csid.Datas.*;
+import csid.datas.*;
 
 import static csid.sharedeck.R.color.Red;
 import static csid.sharedeck.R.drawable.red_button;
