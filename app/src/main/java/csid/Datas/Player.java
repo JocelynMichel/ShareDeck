@@ -1,4 +1,4 @@
-package csid.Datas;
+package csid.datas;
 
 /**
  * Created by jocelyn on 26/05/2016.
