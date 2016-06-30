@@ -1,4 +1,4 @@
-package csid.datas;
+package csid.Datas;
 
 import android.graphics.drawable.*;
 import android.util.Log;
@@ -10,7 +10,7 @@ import java.util.Random;
  * Created by cecca on 10/06/2016.
  */
 public class Deck {
-    private ArrayList<Card> cards;
+    private ArrayList<csid.Datas.Card> cards;
     private int maxCard = 52 ;
     public String[] couleurs = new String[]{"trèfle","coeur","carreau","pique"};
     private BitmapDrawable img=null; // image du deck

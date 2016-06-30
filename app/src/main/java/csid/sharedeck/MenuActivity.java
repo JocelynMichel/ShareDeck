@@ -41,6 +41,16 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        final Button skinButton = (Button) findViewById(R.id.button);
+        skinButton.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, SkinActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
 
