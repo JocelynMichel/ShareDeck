@@ -1,4 +1,4 @@
-package csid.datas;
+package csid.Datas;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by cecca on 10/06/2016.
  */
 public class Game {
-    ArrayList<Player> players;
+    ArrayList<csid.Datas.Player> players;
     Deck deck;
 
     public Game(){
